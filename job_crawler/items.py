@@ -10,10 +10,12 @@ import scrapy
 
 class JobCrawlerItem(scrapy.Item):
     # define the fields for your item here like:
+    jobsalary = scrapy.Field()
     jobname = scrapy.Field()
-    jobdate = scrapy.Field()
     jobcompany = scrapy.Field()
     jobexp = scrapy.Field()
     jobedu = scrapy.Field()
     jobarea = scrapy.Field()
+    jobindcat = scrapy.Field()
+    jobdate = scrapy.Field()
 #     pass
