@@ -15,6 +15,8 @@ SPIDER_MODULES = ['job_crawler.spiders']
 NEWSPIDER_MODULE = 'job_crawler.spiders'
 FEED_EXPORT_ENCODING = 'utf-8'
 
+MONGODB_URI = 'mongodb://localhost:27017'
+MONGODB_DB_NAME = 'job_data'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'job_crawler (+http://www.yourdomain.com)'
 
@@ -64,9 +66,11 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
+ITEM_PIPELINES = {
 #    'job_crawler.pipelines.JobCrawlerPipeline': 300,
-#}
+    'job_crawler.pipelines.DuplicatesPipeline': 350,
+    'job_crawler.pipelines.MongoDBPipline': 400,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

@@ -34,6 +34,7 @@ class Spider104(scrapy.Spider):
         jobedu = selector.xpath('//div/ul[2]/li[3]/text()')[2:].extract()
         jobarea = selector.xpath('//div/ul[2]/li[1]/text()')[5:].extract()
         jobindcat = selector.xpath('//article/@data-indcat-desc').extract()
+        jobapply = selector.xpath('.//div/a/text()')[2:-6].extract()
         jobdate = selector.css('.b-tit__date')[3:]
         if len(jobname) == 0:
             raise  CloseSpider('No more pages')
@@ -48,10 +49,10 @@ class Spider104(scrapy.Spider):
                 jobcrawleritem['jobexp'] = jobexp[i]
                 jobcrawleritem['jobedu'] = jobedu[i]
                 jobcrawleritem['jobarea'] = jobarea[i]
-                
+                jobcrawleritem['jobapply'] = jobapply[i]
                 yield jobcrawleritem
                 
         self.page_number += 1
-        print(self.page_number)
+        print(f"第{self.page_number}頁")
         urls = Spider104.url_get(self.page_number)
         yield scrapy.Request(urls)

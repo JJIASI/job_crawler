@@ -18,4 +18,5 @@ class JobCrawlerItem(scrapy.Item):
     jobarea = scrapy.Field()
     jobindcat = scrapy.Field()
     jobdate = scrapy.Field()
+    jobapply = scrapy.Field()
 #     pass
