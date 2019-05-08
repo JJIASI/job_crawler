@@ -19,4 +19,5 @@ class JobCrawlerItem(scrapy.Item):
     jobindcat = scrapy.Field()
     jobdate = scrapy.Field()
     jobapply = scrapy.Field()
+    sourceweb = scrapy.Field()
 #     pass

@@ -37,7 +37,7 @@ class Spider104(scrapy.Spider):
         jobapply = selector.xpath('.//div/a/text()')[2:-6].extract()
         jobdate = selector.css('.b-tit__date')[3:]
         if len(jobname) == 0:
-            raise  print('No more pages')
+            raise  CloseSpider('No more pages')
         for i in range(len(jobname)):
             if len(jobdate[i].xpath('.//text()').extract())==1:
                 jobcrawleritem = JobCrawlerItem()
@@ -50,7 +50,6 @@ class Spider104(scrapy.Spider):
                 jobcrawleritem['jobedu'] = jobedu[i]
                 jobcrawleritem['jobarea'] = jobarea[i]
                 jobcrawleritem['jobapply'] = jobapply[i]
-                jobcrawleritem['sourceweb'] = '104人力銀行'
                 yield jobcrawleritem
                 
         self.page_number += 1
