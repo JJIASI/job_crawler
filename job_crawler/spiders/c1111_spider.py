@@ -5,22 +5,24 @@ from job_crawler.items import JobCrawlerItem
 
 class Spider1111(scrapy.Spider):
     name='crawler1111'
-    
-    def url_get(page_n):
+    keyword = input("Enter the keyword to be 1111 scrape: ")
+
+    def __init__(self):
+        self.page_number = 1
+
+    def url_get(page_n, keyword):
         data = {
             'si': 1,
             'ss': 'l',
-            'ks': 'golang', 
+            'ks': keyword, 
             'pt': 0,
             'page': page_n
         }
         urls = 'https://www.1111.com.tw/job-bank/job-index.asp?' + urlencode(data)
         return urls
     
-    start_urls = [url_get(1)]
+    start_urls = [url_get(1, keyword)]
     
-    def __init__(self):
-        self.page_number = 1
         
     def parse(self, response):
         selector = Selector(response)
@@ -47,9 +49,12 @@ class Spider1111(scrapy.Spider):
                 jobcrawleritem['jobarea'] = jobarea[i]
                 jobcrawleritem['jobapply'] = jobapply[i]
                 jobcrawleritem['sourceweb'] = '1111人力銀行'
+                jobcrawleritem['keyword'] = self.keyword
                 yield jobcrawleritem
                 
         self.page_number += 1
+        if self.page_number > 50:
+            raise  print('50 sheets complete!')
         print(f"第{self.page_number}頁")
-        urls = Spider1111.url_get(self.page_number)
+        urls = Spider1111.url_get(self.page_number, self.keyword)
         yield scrapy.Request(urls)

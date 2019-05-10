@@ -20,4 +20,5 @@ class JobCrawlerItem(scrapy.Item):
     jobdate = scrapy.Field()
     jobapply = scrapy.Field()
     sourceweb = scrapy.Field()
+    keyword = scrapy.Field()
 #     pass
