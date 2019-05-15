@@ -19,7 +19,12 @@ class JobItemPipeline(object):
         if item['sourceweb'] == '1111人力銀行':
             item['jobdate'] = datetime.datetime.strptime(item['jobdate'], "%Y-%m-%d")
         elif item['sourceweb'] == '104人力銀行':
-            item['jobdate'] = datetime.datetime.strptime('2019/'+item['jobdate'], "%Y/%m/%d")
+            now = datetime.datetime.now()
+            tmp_date = datetime.datetime.strptime('2019/'+item['jobdate'], "%Y/%m/%d")
+            if (now-tmp_date).days < 0:
+                item['jobdate'] = datetime.datetime.strptime('2018/'+item['jobdate'], "%Y/%m/%d")
+            else:
+                item['jobdate'] = datetime.datetime.strptime('2019/'+item['jobdate'], "%Y/%m/%d")
         
         # jobexp
         if item['jobexp'] == '經驗不拘':
