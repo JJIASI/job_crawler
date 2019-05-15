@@ -27,13 +27,21 @@ class JobItemPipeline(object):
                 item['jobdate'] = datetime.datetime.strptime('2019/'+item['jobdate'], "%Y/%m/%d")
         
         # jobexp
-        if item['jobexp'] == '經驗不拘':
-            item['jobexp'] = 0
-        elif len(item['jobexp']) == 8:
-            item['jobexp'] = int(item['jobexp'][0])
-        elif len(item['jobexp']) == 9:
-            item['jobexp'] = int(item['jobexp'][0:1])
-        
+        if item['sourceweb'] == '1111人力銀行':
+            if item['jobexp'] == '經驗不拘':
+                item['jobexp'] = 0
+            elif len(item['jobexp']) == 8:
+                item['jobexp'] = int(item['jobexp'][0])
+            elif len(item['jobexp']) == 9:
+                item['jobexp'] = int(item['jobexp'][0:1])
+        elif item['sourceweb'] == '104人力銀行':
+            if item['jobexp'] == '經歷不拘':
+                item['jobexp'] = 0
+            elif len(item['jobexp']) == 4:
+                item['jobexp'] = int(item['jobexp'][0])
+            elif len(item['jobexp']) == 5:
+                item['jobexp'] = int(item['jobexp'][0:1])
+                
         # jobsalay
         def salary_mean(salary,pay_form):
             if '~' in salary:
@@ -80,7 +88,7 @@ class DuplicatesPipeline(object):
         return item
 
 class MongoDBPipline(object):
-    '''Write data to database
+    '''Write data into database
     
     '''
     def open_spider(self, spider):
