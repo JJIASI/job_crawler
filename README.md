@@ -55,7 +55,7 @@ item內容如下:
 `setting.py` 這個檔案是支配Scrapy框架的配置檔，可以在裡面設定整個框架的默認設定。  
 
 ##   附上爬取後資料統計結果(5/14)
-  [統計結果](demo.ipynb)
+  [統計結果](https://nbviewer.jupyter.org/github/JJIASI/job_crawler/blob/5841801c37a138570a45ad8285b5e71728bc60a9/demo.ipynb)
   
 內容僅供技術交流   
 如有問題或建議，敬請不吝指教。  
